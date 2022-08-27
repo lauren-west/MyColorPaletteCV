@@ -1,7 +1,5 @@
 """Tests image color summarizer for determining hue, saturdation, and value"""
-from typing import Tuple
 import unittest
-import matplotlib.pyplot as plt
 from skimage import data
 import image_color_summarizer
 

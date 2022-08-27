@@ -16,6 +16,18 @@ import matplotlib.pyplot as plt
 from matplotlib import patches
 
 
+def crop(face_rectangle, img: np.ndarray):
+    """Helper function for detect_faces.
+
+    Crops the image to contain just the detected face.
+    """
+    x0 = face_rectangle["x"]
+    y0 = face_rectangle["y"]
+    width = face_rectangle["width"]
+    height = face_rectangle["height"]
+    return img[y0:y0+height, x0:x0+width, :]
+
+
 def detect_faces(trained_file: str, img: np.ndarray) -> plt.Axes:
     # Initialize the detector cascade.
     detector = feature.Cascade(trained_file)
@@ -24,16 +36,14 @@ def detect_faces(trained_file: str, img: np.ndarray) -> plt.Axes:
                                            step_ratio=1,
                                            min_size=(60, 60),
                                            max_size=(123, 123))
-    img_desc = plt.gca()
-    for patch in detected:
-        img_desc.add_patch(
-            patches.Rectangle(
-                (patch['c'], patch['r']),
-                patch['width'],
-                patch['height'],
-                fill=False,
-                color='r',
-                linewidth=2
-            )
-        )
-    return img_desc
+    face_rectangles = []
+    for rectangle in detected:
+        face_rectangle = {
+            "x": rectangle['c'],
+            "y": rectangle['r'],
+            "width": rectangle['width'],
+            "height": rectangle['height'],
+        }
+        face_rectangles.append(face_rectangle)
+
+    return face_rectangles
