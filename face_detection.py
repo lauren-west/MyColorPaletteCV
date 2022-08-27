@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from matplotlib import patches
 
 
-def crop(face_rectangle, img: np.ndarray):
+def crop(face_rectangle, img: np.ndarray) -> np.ndarray:
     """Helper function for detect_faces.
 
     Crops the image to contain just the detected face.
