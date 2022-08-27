@@ -28,7 +28,9 @@ def crop(face_rectangle, img: np.ndarray) -> np.ndarray:
     return img[y0:y0+height, x0:x0+width, :]
 
 
-def detect_faces(trained_file: str, img: np.ndarray) -> plt.Axes:
+def detect_faces(img: np.ndarray) -> plt.Axes:
+    # Load the trained file from the module root.
+    trained_file = data.lbp_frontal_face_cascade_filename()
     # Initialize the detector cascade.
     detector = feature.Cascade(trained_file)
     detected = detector.detect_multi_scale(img=img,

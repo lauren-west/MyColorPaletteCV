@@ -1,4 +1,5 @@
 """Identifies color season for an individual's profile."""
+from typing import Tuple
 import numpy as np
 import face_detection
 import image_color_summarizer
@@ -30,16 +31,19 @@ def match_characteristics_to_season(primary_characteristic: str,
 
 
 def get_primary_and_secondary_characteristics(
-        hue: np.ndarry, sat: np.ndarray, val: np.ndarray):
+        hue: np.ndarray, sat: np.ndarray, val: np.ndarray
+) -> Tuple[str, str]:
     pass
 
 
 def identify_color_season(img: np.ndarray):
     faces = face_detection.detect_faces(img)
-    face = face_detection.crop(faces[0])
+    face = face_detection.crop(faces[0], img)
 
-    hue, sat, val = image_color_summarizer(face)
-
+    hue, sat, val = image_color_summarizer.image_color_summarizer(face)
+    print(type(hue))
+    print(type(sat))
+    print(type(val))
     primary, secondary = get_primary_and_secondary_characteristics(
         hue, sat, val)
     color_season = match_characteristics_to_season(primary, secondary)

@@ -9,11 +9,8 @@ import face_detection
 class TestFaceDetection(unittest.TestCase):
 
     def test_face_detection(self):
-       # Load the trained file from the module root.
-        trained_file = data.lbp_frontal_face_cascade_filename()
         img = data.astronaut()
 
-        face_rectangles = face_detection.detect_faces(
-            trained_file, img)
+        face_rectangles = face_detection.detect_faces(img)
 
         self.assertIsNotNone(face_rectangles)

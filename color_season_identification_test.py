@@ -11,7 +11,7 @@ class TestColorSeasonIdentification(unittest.TestCase):
         primary, secondary = "light", "cool"
 
         actual_color_season = (
-            color_season_identification.identify_color_season(
+            color_season_identification.match_characteristics_to_season(
                 primary, secondary))
 
         self.assertEqual(actual_color_season, expected_color_season)
